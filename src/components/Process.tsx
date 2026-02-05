@@ -164,7 +164,7 @@ export default function Process() {
           ...with{' '}
           <span className="relative inline-block">
             <span>infrastructure</span>
-            <span className="bleeding-stroke animate" style={{ transform: 'rotate(-1.8deg)', background: '#2c2c2c' }}></span>
+            <span className={`bleeding-stroke ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-1.8deg)', background: '#2c2c2c' }}></span>
           </span>{' '}
           to support
           <Image
