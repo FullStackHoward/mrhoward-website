@@ -1,26 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #2c2c2c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Fira Code', monospace;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Bleeding Underline Effect */
+.bleeding-stroke {
+  position: absolute;
+  bottom: -8px;
+  left: -2%;
+  width: 0;
+  height: 8px;
+  transform: rotate(-2deg);
+  animation: none;
+  will-change: width, filter;
+  border-radius: 2px;
+  filter: blur(1px);
+}
+
+.bleeding-stroke.animate {
+  animation: bleed 1.2s ease-out forwards;
+}
+
+/* Color Variations */
+.bleeding-stroke-deep-blue {
+  background: #4A90E2;
+}
+
+.bleeding-stroke-electric-green {
+  background: #00FF7F;
+}
+
+.bleeding-stroke-coral {
+  background: #f96465;
+}
+
+.bleeding-stroke-sunny-yellow {
+  background: #FFD93D;
+}
+
+@keyframes bleed {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    width: 104%;
+    opacity: 1;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  .bleeding-stroke {
+    animation-delay: 0.3s;
+  }
+}
+
+@media (max-width: 768px) and (max-resolution: 2dppx) {
+  @keyframes bleed {
+    50% { filter: blur(0.5px); }
+    100% { filter: blur(0.25px); }
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .bleeding-stroke {
+    animation: none;
+    width: 100%;
+    opacity: 1;
+    filter: none;
+  }
 }
