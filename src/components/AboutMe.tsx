@@ -3,7 +3,7 @@ import BleedingUnderline from "@/components/BleedingUnderline";
 
 export default function AboutMe() {
   return (
-    <section className="py-20 bg-white">
+    <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-12 text-center">
           ... just call me{' '}

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Motion() {
   return (
-    <section className="py-12 md:py-20" style={{ backgroundColor: '#fddada' }}>
+    <section id="motion" className="py-12 md:py-20" style={{ backgroundColor: '#fddada' }}>
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center max-w-6xl xl:max-w-7xl mx-auto">
           {/* Left Column - Text */}

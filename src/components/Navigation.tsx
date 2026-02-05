@@ -8,10 +8,9 @@ export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: "Services", href: "/services" },
-    { label: "Development", href: "/development" },
-    { label: "Marketing", href: "/marketing" },
-    { label: "About", href: "/about" },
+    { label: "Creations", href: "#motion" },
+    { label: "Process", href: "#process" },
+    { label: "About", href: "#about" },
   ];
 
   return (
@@ -35,7 +34,7 @@ export default function Navigation() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="#contact"
               className="bg-black text-white px-6 py-2 rounded-[12px] hover:bg-gray-800 transition-colors text-[20px]"
             >
               Contact Me
@@ -80,7 +79,7 @@ export default function Navigation() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="#contact"
               className="block py-3 px-4 text-[20px] hover:text-deep-blue font-medium"
               onClick={() => setIsMenuOpen(false)}
             >

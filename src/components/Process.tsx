@@ -35,7 +35,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section className="py-12 md:py-20" style={{ backgroundColor: '#F4EAD5' }}>
+    <section id="process" className="py-12 md:py-20" style={{ backgroundColor: '#F4EAD5' }}>
       <div className="container mx-auto px-4 md:px-8">
         {/* Top Heading */}
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[40px] font-bold text-center mb-8 md:mb-16 leading-relaxed">
