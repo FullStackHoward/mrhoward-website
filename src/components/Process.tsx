@@ -1,11 +1,28 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import BleedingUnderline from '@/components/BleedingUnderline';
 
 export default function Process() {
   const [visibleArrows, setVisibleArrows] = useState<number[]>([]);
+  const [shouldAnimateStrokes, setShouldAnimateStrokes] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldAnimateStrokes(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     // Blink arrows sequentially: fade in, fade out, next arrow
@@ -35,29 +52,29 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="process" className="py-12 md:py-20" style={{ backgroundColor: '#F4EAD5' }}>
+    <section ref={sectionRef} id="process" className="py-12 md:py-20" style={{ backgroundColor: '#F4EAD5' }}>
       <div className="container mx-auto px-4 md:px-8">
         {/* Top Heading */}
         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-[40px] font-bold text-center mb-8 md:mb-16 leading-relaxed">
           From{' '}
           <span className="relative inline-block">
             <span>Idea</span>
-            <span className="bleeding-stroke bleeding-stroke-sunny-yellow animate" style={{ transform: 'rotate(-1.5deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-sunny-yellow ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-1.5deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Concept</span>
-            <span className="bleeding-stroke bleeding-stroke-deep-blue animate" style={{ transform: 'rotate(2deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-deep-blue ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(2deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Wireframe</span>
-            <span className="bleeding-stroke bleeding-stroke-coral animate" style={{ transform: 'rotate(-2.5deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-coral ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-2.5deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Product</span>
-            <span className="bleeding-stroke bleeding-stroke-electric-green animate" style={{ transform: 'rotate(1.8deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-electric-green ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(1.8deg)' }}></span>
           </span>
           ...
         </h2>
