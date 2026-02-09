@@ -4,13 +4,13 @@ export default function Footer() {
   return (
     <footer className="relative" style={{ backgroundColor: '#F4EAD5' }}>
       {/* Cloud Divider - upside down */}
-      <div className="relative w-full -mt-5 md:-mt-[22px] lg:-mt-5">
+      <div className="relative w-full -mt-5 md:-mt-[22px] lg:-mt-5 -top-[1px]">
         <Image
           src="/svg/cloud_divider.svg"
           alt="Cloud divider"
           width={1920}
           height={100}
-          className="w-full h-auto transform rotate-180"
+          className="w-full h-auto block transform rotate-180"
           priority
         />
       </div>
