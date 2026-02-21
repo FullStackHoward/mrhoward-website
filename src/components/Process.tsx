@@ -6,15 +6,24 @@ import BleedingUnderline from '@/components/BleedingUnderline';
 
 export default function Process() {
   const [visibleArrows, setVisibleArrows] = useState<number[]>([]);
-  const [shouldAnimateStrokes, setShouldAnimateStrokes] = useState(false);
+  const [animatedStrokes, setAnimatedStrokes] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setShouldAnimateStrokes(true);
+          // Animate strokes sequentially with delays
+          const delays = [0, 300, 600, 900, 1200]; // delays in ms for each stroke
+          const timers = delays.map((delay, index) => 
+            setTimeout(() => {
+              setAnimatedStrokes(prev => [...prev, index]);
+            }, delay)
+          );
+          
           observer.disconnect();
+          
+          return () => timers.forEach(timer => clearTimeout(timer));
         }
       },
       { threshold: 0.3 }
@@ -59,22 +68,22 @@ export default function Process() {
           From{' '}
           <span className="relative inline-block">
             <span>Idea</span>
-            <span className={`bleeding-stroke bleeding-stroke-sunny-yellow ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-1.5deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-sunny-yellow ${animatedStrokes.includes(0) ? 'animate' : ''}`} style={{ transform: 'rotate(-1.5deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Concept</span>
-            <span className={`bleeding-stroke bleeding-stroke-deep-blue ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(2deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-deep-blue ${animatedStrokes.includes(1) ? 'animate' : ''}`} style={{ transform: 'rotate(2deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Wireframe</span>
-            <span className={`bleeding-stroke bleeding-stroke-coral ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-2.5deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-coral ${animatedStrokes.includes(2) ? 'animate' : ''}`} style={{ transform: 'rotate(-2.5deg)' }}></span>
           </span>{' '}
           to{' '}
           <span className="relative inline-block">
             <span>Product</span>
-            <span className={`bleeding-stroke bleeding-stroke-electric-green ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(1.8deg)' }}></span>
+            <span className={`bleeding-stroke bleeding-stroke-electric-green ${animatedStrokes.includes(3) ? 'animate' : ''}`} style={{ transform: 'rotate(1.8deg)' }}></span>
           </span>
           ...
         </h2>
@@ -164,7 +173,7 @@ export default function Process() {
           ...with{' '}
           <span className="relative inline-block">
             <span>infrastructure</span>
-            <span className={`bleeding-stroke ${shouldAnimateStrokes ? 'animate' : ''}`} style={{ transform: 'rotate(-1.8deg)', background: '#2c2c2c' }}></span>
+            <span className={`bleeding-stroke ${animatedStrokes.includes(4) ? 'animate' : ''}`} style={{ transform: 'rotate(-1.8deg)', background: '#2c2c2c' }}></span>
           </span>{' '}
           to support
           <Image
